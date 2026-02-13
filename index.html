@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Themamaand 2026 - Jouw Reis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #1f284e;
+            --color-primary: #1f284e;
+            --color-secondary: #e9f0f5;
+            --color-accent: #50a78a;
+            --color-text: #1e0e3b;
+            --color-text-dim: #3a4a5c;
+            --color-card: rgba(223, 233, 240, 0.50);
+            --color-card-hover: rgba(223, 233, 240, 0.62);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .header .practical-box {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(80, 167, 138, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.6; transform: translateX(-50%) scale(0.95); }
+            to { opacity: 1; transform: translateX(-50%) scale(1.05); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #e9f0f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #b0bec9;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                var(--color-primary) 0%, 
+                var(--color-secondary) 50%, 
+                var(--color-accent) 100%);
+            z-index: 0;
+        }
+
+        .phase {
+            position: relative;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .phase.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .phase-content {
+            width: 45%;
+            padding: 30px;
+            background: var(--color-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase:nth-child(odd) .phase-content {
+            margin-left: auto;
+        }
+
+        .phase:nth-child(even) .phase-content {
+            margin-right: auto;
+        }
+
+        .phase-content:hover {
+            background: var(--color-card-hover);
+            border-color: rgba(80, 167, 138, 0.4);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 30px rgba(80, 167, 138, 0.1);
+        }
+
+        .phase-icon {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+            background: var(--color-card);
+            border: 4px solid var(--color-bg);
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .phase-content:hover ~ .phase-icon,
+        .phase:hover .phase-icon {
+            transform: translateX(-50%) scale(1.15) rotate(5deg);
+            box-shadow: 0 0 20px rgba(80, 167, 138, 0.4);
+        }
+
+        .phase-icon.fase1 { background: linear-gradient(135deg, #1f284e, #2a3660); }
+        .phase-icon.fase2 { background: linear-gradient(135deg, #50a78a, #3d8d73); }
+        .phase-icon.fase3 { background: linear-gradient(135deg, #1f284e, #2a3660); }
+        .phase-icon.fase4 { background: linear-gradient(135deg, #50a78a, #3d8d73); }
+        .phase-icon.fase5 { background: linear-gradient(135deg, #1f284e, #50a78a); }
+        .phase-icon.finale { background: linear-gradient(135deg, #50a78a, #1f284e); }
+
+        .phase-header {
+            margin-bottom: 20px;
+        }
+
+        .phase-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            transition: color 0.4s ease;
+        }
+
+        .phase.active .phase-number {
+            color: var(--color-primary);
+        }
+
+        .phase-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            transition: color 0.4s ease;
+        }
+
+        .phase.active .phase-title {
+            color: var(--color-text);
+        }
+
+        .phase-tagline {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 20px;
+            transition: color 0.4s ease;
+        }
+
+        .phase.active .phase-tagline {
+            color: var(--color-text-dim);
+        }
+
+        .phase-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .phase.active .phase-details {
+            max-height: 2000px;
+        }
+
+        .event {
+            background: rgba(31, 40, 78, 0.05);
+            border-left: 3px solid var(--color-primary);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .event.required {
+            border-left-color: var(--color-secondary);
+            background: rgba(233, 240, 245, 0.05);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .event-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            flex: 1;
+        }
+
+        .event-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .event-badge.verplicht {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .event-badge.optioneel {
+            background: rgba(80, 167, 138, 0.15);
+            color: #50a78a;
+        }
+
+        .event-meta {
+            font-size: 0.9rem;
+            color: #2a3450;
+            margin-bottom: 12px;
+        }
+
+        .event-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #2e3d52;
+        }
+
+        .event-description strong {
+            color: var(--color-text);
+        }
+
+        .role-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .role {
+            background: rgba(31, 40, 78, 0.08);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .role-name {
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        .role-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-dim);
+        }
+
+        .expand-indicator {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--color-text-dim);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .expand-indicator::after {
+            content: '▼';
+            margin-left: 8px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .phase.active .expand-indicator::after {
+            transform: rotate(180deg);
+        }
+
+        .practical-box {
+            background: rgba(223, 233, 240, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .practical-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .practical-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .practical-item {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #c8d3dc;
+        }
+
+        .practical-item strong {
+            color: var(--color-accent);
+        }
+
+        .portal-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-primary), #182245);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--chat--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(31, 40, 78, 0.3);
+            margin-top: 10px;
+        }
+
+        .portal-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(31, 40, 78, 0.4), 0 0 15px rgba(80, 167, 138, 0.2);
+            background: linear-gradient(135deg, #182245, #1f284e);
+        }
+
+        @media (max-width: 968px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .phase-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+
+            .phase-icon {
+                left: 30px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .phase-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Animated background gradient blobs */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+        }
+
+        .bg-blob-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #50a78a, transparent 70%);
+            top: -10%;
+            right: -5%;
+            animation: blobFloat1 12s ease-in-out infinite alternate;
+        }
+
+        .bg-blob-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #2a3660, transparent 70%);
+            bottom: 20%;
+            left: -8%;
+            animation: blobFloat2 15s ease-in-out infinite alternate;
+        }
+
+        .bg-blob-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #50a78a, transparent 70%);
+            bottom: -5%;
+            right: 20%;
+            animation: blobFloat3 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes blobFloat1 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(-60px, 80px) scale(1.15); }
+        }
+
+        @keyframes blobFloat2 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(70px, -50px) scale(1.1); }
+        }
+
+        @keyframes blobFloat3 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(-40px, -60px) scale(1.2); }
+        }
+
+        /* Noise/grain texture overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(80, 167, 138, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 9999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: rgba(80, 167, 138, 1);
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(80, 167, 138, 0.4);
+        }
+
+        /* Custom UFO cursor */
+        * {
+            cursor: none !important;
+        }
+
+        .ufo-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            pointer-events: none;
+            z-index: 99999;
+            will-change: transform;
+            transition: opacity 0.3s ease;
+        }
+
+        .ufo-cursor svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 12px rgba(80, 167, 138, 0.4));
+        }
+        .expand-indicator {
+            transition: color 0.3s ease;
+        }
+
+        .phase-content:hover .expand-indicator {
+            color: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-blobs">
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="bg-blob bg-blob-2"></div>
+        <div class="bg-blob bg-blob-3"></div>
+    </div>
+
+    <!-- Noise/grain overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll naar boven">↑</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>AI themamaand 2026</h1>
+            <p class="subtitle">Jouw reis van inspiratie naar impact</p>
+            <p class="tagline">Samen slimmer met AI</p>
+            
+            <div class="practical-box">
+                <h3 class="practical-title">Praktische Informatie</h3>
+                <div class="practical-items">
+                    <div class="practical-item">
+                        <strong>Tijdschrijving</strong><br>
+                        Schrijf je uren op code 701 "Themamaand"
+                    </div>
+                    <div class="practical-item">
+                        <strong>Thuiswerkdag</strong><br>
+                        Verzet je dag voor de brainstorm sessie
+                    </div>
+                    <div class="practical-item">
+                        <strong>Video's kijken?</strong><br>
+                        Bekijk ze samen met je team!
+                    </div>
+                    <div class="practical-item">
+                        <strong>Vragen?</strong><br>
+                        Neem contact op met de organisatie
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <!-- FASE 1 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-icon fase1">1</div>
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-number">Fase 1: Inspiratie</div>
+                        <h2 class="phase-title">Laat je inspireren</h2>
+                        <p class="phase-tagline">"Open je ogen voor wat AI kan betekenen"</p>
+                    </div>
+                    
+                    <div class="phase-details">
+                        <div class="event required">
+                            <div class="event-header">
+                                <h3 class="event-title">AI Inspiratiesessie - Het Vertrekpunt</h3>
+                                <span class="event-badge verplicht">Verplicht</span>
+                            </div>
+                            <div class="event-meta">📍 9 maart | 15.00-15.30u | Theater IJK (of online)</div>
+                            <div class="event-description">
+                                Programmamanager neemt je mee in de wereld van AI. Wat betekent het vandaag? Welke kansen biedt het voor jouw werk? Een laagdrempelige sessie van een halfuur die je perspectief verandert.
+                                <br><br>
+                                <strong>Tip:</strong> Deze sessie wordt opgenomen - geen stress over thuiswerkdagen
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(30,14,59,0.1);">
+                            <h4 style="color: var(--color-primary); margin-bottom: 15px; font-size: 1.1rem;">Verdieping - kies wat bij jou past</h4>
+                        </div>
+
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">Verantwoord omgaan met AI</h3>
+                                <span class="event-badge optioneel">Optioneel</span>
+                            </div>
+                            <div class="event-meta">📍 5 februari | 13.30-14.30u | Voor iedereen | Door Marieke</div>
+                            <div class="event-description">
+                                Privacy, transparantie, eerlijkheid - hoe zet je AI bewust in? Ontdek waar je op moet letten en wat jij zelf kunt doen om AI verantwoord te gebruiken.
+                            </div>
+                        </div>
+
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">N8N: Je eerste kennismaking</h3>
+                                <span class="event-badge optioneel">Optioneel</span>
+                            </div>
+                            <div class="event-meta">📍 9 februari | 10.00-11.00u | Niveau 2-4</div>
+                            <div class="event-description">
+                                Repetitieve taken automatiseren zonder programmeren? Ontdek N8N en leer hoe je chatbots inzet en workflows bouwt. Zie hoe anderen het al gebruiken.
+                            </div>
+                        </div>
+
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">AI in Excel</h3>
+                                <span class="event-badge optioneel">Optioneel</span>
+                            </div>
+                            <div class="event-meta">📍 24 februari | 9.30-10.15u | Niveau 1-2</div>
+                            <div class="event-description">
+                                Excel ken je, maar kende je ook de AI-superkrachten? Maak je werk sneller en slimmer met praktische voorbeelden die je direct toepast.
+                            </div>
+                        </div>
+
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">AI voor thuis</h3>
+                                <span class="event-badge optioneel">Optioneel</span>
+                            </div>
+                            <div class="event-meta">📍 3 maart | 10.00-11.00u | Voor iedereen</div>
+                            <div class="event-description">
+                                Van vakantieplanning tot verhaaltjes voor de kids - AI maakt je leven buiten werk ook makkelijker. Inspiratie en praktische tips zonder technische kennis.
+                            </div>
+                        </div>
+
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">Workflow automation</h3>
+                                <span class="event-badge optioneel">Optioneel</span>
+                            </div>
+                            <div class="event-meta">📍 23 maart | 10.00-11.00u | Gevorderden</div>
+                            <div class="event-description">
+                                Klaar voor de volgende stap? Bouw slimme workflows, koppel systemen en automatiseer processen. Hands-on en praktisch voor wie al AI-ervaring heeft.
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(31, 40, 78, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--color-text-dim);">
+                            <a href="https://49597.afasinsite.nl/portal-insite-prs/ijk-opleidingsportaal" target="_blank" class="portal-button">📲 Inschrijven via opleidingsportaal</a>
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Klik voor details</div>
+                </div>
+            </div>
+
+            <!-- FASE 2 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-icon fase2">2</div>
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-number">Fase 2: Brainstorm</div>
+                        <h2 class="phase-title">Ontdek samen de kansen</h2>
+                        <p class="phase-tagline">"Van inspiratie naar concreet idee"</p>
+                    </div>
+                    
+                    <div class="phase-details">
+                        <div class="event required">
+                            <div class="event-header">
+                                <h3 class="event-title">Jouw Brainstormsessie</h3>
+                                <span class="event-badge verplicht">Verplicht - Hele Team</span>
+                            </div>
+                            <div class="event-meta">📍 30 maart of 7 april | 1,5 uur | Fysiek aanwezig</div>
+                            <div class="event-description">
+                                <strong>Dit is waar de magie gebeurt.</strong> Met jouw multidisciplinaire team ga je:
+                                <br><br>
+                                <strong>Vrij denken</strong> - Alle ideeën zijn welkom, niets is te gek<br>
+                                <strong>Kansen herkennen</strong> - Waar kan AI écht tijd besparen of kwaliteit verbeteren?<br>
+                                <strong>Elkaar versterken</strong> - E-HRM, Payroll en Salaris adviseurs brengen verschillende inzichten<br>
+                                <strong>Richting bepalen</strong> - Kies welke processen jullie verder uitwerken
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 25px; padding: 20px; background: rgba(31, 40, 78, 0.05); border-radius: 8px;">
+                            <h4 style="color: var(--color-primary); margin-bottom: 15px;">Jullie bepalen ook de teamrollen:</h4>
+                            <div class="role-list">
+                                <div class="role">
+                                    <div class="role-name">Coördinator</div>
+                                    <div class="role-desc">Bewaakt de voortgang</div>
+                                </div>
+                                <div class="role">
+                                    <div class="role-name">Bouwer</div>
+                                    <div class="role-desc">Werkt het uit</div>
+                                </div>
+                                <div class="role">
+                                    <div class="role-name">Tester</div>
+                                    <div class="role-desc">Kijkt kritisch mee</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; font-style: italic; color: var(--color-primary);">
+                            Dit is je startpunt - vanaf hier wordt het echt
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Klik voor details</div>
+                </div>
+            </div>
+
+            <!-- FASE 3 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-icon fase3">3</div>
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-number">Fase 3: Procesmapping</div>
+                        <h2 class="phase-title">Maak het concreet</h2>
+                        <p class="phase-tagline">"Van idee naar uitvoerbaar plan"</p>
+                    </div>
+                    
+                    <div class="phase-details">
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">Procesmapping</h3>
+                                <span class="event-badge verplicht">2 Teamleden</span>
+                            </div>
+                            <div class="event-meta">📍 20 of 21 april | 1,5 uur | Café bij Jan</div>
+                            <div class="event-description">
+                                Jullie brainstormidee wordt nu echt uitgewerkt:
+                                <br><br>
+                                <strong>Huidige werkelijkheid</strong> - Hoe werkt het proces nu? Waar zitten de knelpunten?<br>
+                                <strong>Analyse</strong> - Welke stappen kunnen slimmer? Waar past AI perfect?<br>
+                                <strong>Van concept naar plan</strong> - Je idee krijgt handen en voeten<br>
+                                <strong>Pitch voorbereiden</strong> - De basis voor jullie presentatie wordt gelegd
+                                <br><br>
+                                <em>Dieper graven, samen analyseren, realistisch maken</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Klik voor details</div>
+                </div>
+            </div>
+
+            <!-- FASE 4 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-icon fase4">4</div>
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-number">Fase 4: Pitch</div>
+                        <h2 class="phase-title">Overtuig met jouw idee</h2>
+                        <p class="phase-tagline">"Laat zien wat jullie bedacht hebben"</p>
+                    </div>
+                    
+                    <div class="phase-details">
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">Pitchen Automatiseringsvoorstel</h3>
+                                <span class="event-badge verplicht">2 Teamleden</span>
+                            </div>
+                            <div class="event-meta">📍 29 april | 13.30-15.00u | Café bij Jan</div>
+                            <div class="event-description">
+                                <strong>15 minuten per team:</strong>
+                                <br><br>
+                                <strong>5-7 min:</strong> Jullie pitch - hoe ontstond het idee? Waar biedt AI kansen? Waarom maakt dit werk slimmer?
+                                <br>
+                                <strong>Feedback van Benjamin</strong> - Hij beoordeelt haalbaarheid en geeft concrete tips
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 25px; padding: 20px; background: rgba(31, 40, 78, 0.05); border-radius: 8px;">
+                            <h4 style="color: var(--color-primary); margin-bottom: 15px;">Benjamin kijkt naar:</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="padding: 8px 0; border-left: 3px solid var(--color-primary); padding-left: 15px; margin-bottom: 8px;">✓ Is het realistisch uitvoerbaar?</li>
+                                <li style="padding: 8px 0; border-left: 3px solid var(--color-primary); padding-left: 15px; margin-bottom: 8px;">✓ Wat is de impact op jullie werk?</li>
+                                <li style="padding: 8px 0; border-left: 3px solid var(--color-primary); padding-left: 15px; margin-bottom: 8px;">✓ Welke ondersteuning hebben jullie nodig?</li>
+                                <li style="padding: 8px 0; border-left: 3px solid var(--color-primary); padding-left: 15px;">✓ Wat zijn slimme vervolgstappen?</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 20px; font-style: italic; color: var(--color-primary);">
+                            Alle teams zijn erbij - leer van elkaar, laat je inspireren
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Klik voor details</div>
+                </div>
+            </div>
+
+            <!-- FASE 5 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-icon fase5">5</div>
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-number">Fase 5: Bouwen</div>
+                        <h2 class="phase-title">Aan de slag!</h2>
+                        <p class="phase-tagline">"Van praten naar doen"</p>
+                    </div>
+                    
+                    <div class="phase-details">
+                        <div class="event">
+                            <div class="event-header">
+                                <h3 class="event-title">Bouwperiode</h3>
+                            </div>
+                            <div class="event-meta">📍 Mei & Juni | In jullie eigen tempo</div>
+                            <div class="event-description">
+                                Nu gaan jullie écht aan de slag. Met alle inspiratie, kennis en feedback:
+                                <br><br>
+                                • Proberen, testen, bijsturen<br>
+                                • Eerste versie bouwen<br>
+                                • Samen leren en elkaar helpen<br>
+                                • Ontdekken wat werkt (en wat niet)
+                                <br><br>
+                                <strong>Jullie teamrollen komen tot leven</strong>
+                                <br>
+                                Het hoeft niet af - leren en verbeteren staat centraal!
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 25px; padding: 20px; background: rgba(233, 240, 245, 0.05); border-radius: 8px;">
+                            <h4 style="color: var(--color-secondary); margin-bottom: 10px;">In deze fase draait het om:</h4>
+                            <div style="font-size: 0.95rem; line-height: 1.8; color: var(--color-text-dim);">
+                                Doen, proberen en bijsturen • Ideeën vertalen naar een praktische toepassing • Testen wat werkt en wat nog niet • Samen leren en elkaar verder helpen
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Klik voor details</div>
+                </div>
+            </div>
+
+            <!-- FINALE -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-icon finale">★</div>
+                <div class="phase-content">
+                    <div class="phase-header">
+                        <div class="phase-number">Finale</div>
+                        <h2 class="phase-title">Laat het zien</h2>
+                        <p class="phase-tagline">"Vier wat jullie bereikt hebben"</p>
+                    </div>
+                    
+                    <div class="phase-details">
+                        <div class="event required">
+                            <div class="event-header">
+                                <h3 class="event-title">Sectorupdate Presentatie</h3>
+                            </div>
+                            <div class="event-meta">📍 2 juli | 5-10 minuten per team</div>
+                            <div class="event-description">
+                                Presenteer jullie resultaat aan de hele sector:
+                                <br><br>
+                                • Wat hebben we ontdekt?<br>
+                                • Hoe werkt onze oplossing?<br>
+                                • Wat hebben we geleerd?
+                                <br><br>
+                                <strong>Ook work-in-progress is mooi!</strong> De reis telt, niet alleen de finish.
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 25px; padding: 25px; background: linear-gradient(135deg, rgba(31, 40, 78, 0.1), rgba(233, 240, 245, 0.1)); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 1.3rem; font-weight: 600; color: var(--color-primary); margin-bottom: 10px;">
+                                "Dit is niet het einde, maar het startpunt van jullie AI-reis"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Klik voor details</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- UFO Cursor -->
+    <div class="ufo-cursor" id="ufoCursor">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- Beam -->
+            <path d="M24 42 L16 58 L48 58 L40 42" fill="rgba(255,255,255,0.1)" />
+            <!-- Body dome -->
+            <ellipse cx="32" cy="28" rx="12" ry="10" fill="#ffffff" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+            <!-- Window -->
+            <ellipse cx="32" cy="26" rx="6" ry="5" fill="rgba(80,167,138,0.5)"/>
+            <!-- Window shine -->
+            <ellipse cx="30" cy="24" rx="2" ry="1.5" fill="rgba(255,255,255,0.7)"/>
+            <!-- Saucer -->
+            <ellipse cx="32" cy="34" rx="20" ry="6" fill="#e9f0f5"/>
+            <ellipse cx="32" cy="33" rx="20" ry="6" fill="#f0f4f7"/>
+            <ellipse cx="32" cy="33" rx="20" ry="6" fill="#ffffff" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+            <!-- Lights -->
+            <circle cx="20" cy="34" r="2" fill="#50a78a" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="32" cy="36" r="2" fill="#50a78a" opacity="0.6">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="1.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="44" cy="34" r="2" fill="#50a78a" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+            </circle>
+        </svg>
+    </div>
+
+    <script>
+        // UFO cursor
+        const ufo = document.getElementById('ufoCursor');
+        let lastX = 0;
+        let currentTilt = 0;
+        let targetTilt = 0;
+        let ufoBob = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            const deltaX = e.clientX - lastX;
+            targetTilt = Math.max(-25, Math.min(25, deltaX * 2.5));
+            lastX = e.clientX;
+            ufo.style.left = (e.clientX - 18) + 'px';
+            ufo.style.top = (e.clientY - 18) + 'px';
+        });
+
+        // Smooth tilt decay + gentle bob
+        function animateUfo() {
+            currentTilt += (targetTilt - currentTilt) * 0.12;
+            targetTilt *= 0.92;
+            ufoBob += 0.04;
+            const bobY = Math.sin(ufoBob) * 2;
+            ufo.style.transform = `rotate(${currentTilt}deg) translateY(${bobY}px)`;
+            requestAnimationFrame(animateUfo);
+        }
+        animateUfo();
+
+        // Hide UFO when mouse leaves window
+        document.addEventListener('mouseleave', () => ufo.style.opacity = '0');
+        document.addEventListener('mouseenter', () => ufo.style.opacity = '1');
+
+        function togglePhase(element) {
+            const isActive = element.classList.contains('active');
+            
+            // Close all phases
+            document.querySelectorAll('.phase').forEach(phase => {
+                phase.classList.remove('active');
+            });
+            
+            // Open clicked phase if it wasn't active
+            if (!isActive) {
+                element.classList.add('active');
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('.phase').forEach(phase => {
+            phase.addEventListener('click', function() {
+                setTimeout(() => {
+                    if (this.classList.contains('active')) {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 100);
+            });
+        });
+
+        // Scroll-triggered animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 120);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.phase').forEach(phase => {
+            observer.observe(phase);
+        });
+
+        // Scroll-to-top button visibility
+        const scrollBtn = document.querySelector('.scroll-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
